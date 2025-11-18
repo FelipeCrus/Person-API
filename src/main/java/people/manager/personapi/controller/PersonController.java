@@ -4,7 +4,8 @@ package people.manager.personapi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import people.manager.personapi.dto.MessageResponseDTO;
+import people.manager.personapi.dto.request.PersonDTO;
+import people.manager.personapi.dto.response.MessageResponseDTO;
 import people.manager.personapi.entity.Person;
 import people.manager.personapi.service.PersonService;
 
@@ -21,8 +22,7 @@ public class PersonController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO createPerson (@RequestBody Person person) {
-        return  personService.createPerson(person);
+    public MessageResponseDTO createPerson (@RequestBody PersonDTO personDTO) {
 
-    }
+        return personService.createPerson(personDTO); }
 }
