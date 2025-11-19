@@ -5,10 +5,12 @@ import org.springframework.stereotype.Service;
 import people.manager.personapi.dto.request.PersonDTO;
 import people.manager.personapi.dto.response.MessageResponseDTO;
 import people.manager.personapi.entity.Person;
+import people.manager.personapi.exception.PersonNotFoundException;
 import people.manager.personapi.mapper.PersonMapper;
 import people.manager.personapi.repository.PersonRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,5 +38,13 @@ public class PersonService {
         return  allPeople.stream()
                 .map(personMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    public PersonDTO findById(Long id) throws PersonNotFoundException {
+        Person person = personRepository.findById(id)
+                .orElseThrow(() -> new PersonNotFoundException(id));
+
+       return personMapper.toDTO(person);
+
     }
 }
