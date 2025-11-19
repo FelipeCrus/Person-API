@@ -9,6 +9,8 @@ import people.manager.personapi.dto.response.MessageResponseDTO;
 import people.manager.personapi.entity.Person;
 import people.manager.personapi.service.PersonService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/people")
 public class PersonController {
@@ -24,5 +26,14 @@ public class PersonController {
     @ResponseStatus(HttpStatus.CREATED)
     public MessageResponseDTO createPerson (@RequestBody PersonDTO personDTO) {
 
-        return personService.createPerson(personDTO); }
+        return personService.createPerson(personDTO);
+    }
+
+    @GetMapping
+    public List<PersonDTO> listALL(){
+      return personService.listAll();
+    }
+
 }
+
+
