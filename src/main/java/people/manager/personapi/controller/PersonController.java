@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import people.manager.personapi.dto.request.PersonDTO;
 import people.manager.personapi.dto.response.MessageResponseDTO;
-import people.manager.personapi.entity.Person;
 import people.manager.personapi.exception.PersonNotFoundException;
 import people.manager.personapi.service.PersonService;
 
@@ -38,6 +37,12 @@ public class PersonController {
     @GetMapping("/{id}")
     public PersonDTO findById(@PathVariable Long id) throws PersonNotFoundException {
         return personService.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) throws PersonNotFoundException {
+        personService.delete(id);
     }
 
 }
